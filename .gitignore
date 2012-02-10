@@ -1,0 +1,8 @@
+*.cfg
+*.log
+*.pyc
+*.tmproj
+*~
+*#
+.DS_Store
+settings.py
