@@ -267,7 +267,9 @@ class IndivoAccount(IndivoModel):
                       full_name=default_info['full_name'],
                       contact_email=default_info['contact_email'], new=False)
 
-        if not account._fetch():
+        try:
+            account._fetch()
+        except ValueError as e:
             
             # account didn't exist: create it
             account.push()
