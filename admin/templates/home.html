@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<section>
+		<div class="page-header">
+			<h3>New</h3>
+		</div>
+	</section>
+	<div class="row">
+		<a class="btn primary offset1" href="/admin/record/">+ Record</a>
+	</div>
+	<section>
+		<div class="page-header">
+			<h3>Search Records</h3>
+		</div>
+		<form action="/admin/record/search" method="get">
+			<div class="clearfix">
+				<label for="search_string">By Full Name:</label>
+				<div class="input">
+					<input class="xlarge" name="search_string" size="30" type="text">
+					<input type="submit" value="Search" class="btn primary "/>
+				</div>
+			</div>
+		</form>
+	</section>
+	{% if user.is_superuser %}
+	<section>
+	  <div class="page-header">
+	    <h3>Manage Admin Users</h3>
+	  </div>
+	  <div class="row">
+	    <a class="btn primary offset1" href="/admin/users/">Manage</a>
+	  </div>
+	</section>
+	{% endif %}
+{% endblock %}

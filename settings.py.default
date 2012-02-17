@@ -10,6 +10,9 @@ DEFAULT_USERS = (
         # ('Your Name', 'your_email@domain.com', 'yourpassword'),
 )
 
+INDIVO_OAUTH_CREDENTIALS = ('indivoadmin', 'indivoadminsecret')
+INDIVO_SERVER_LOCATION = {'scheme': 'http', 'host': 'fda.gping.org', 'port': '8004'}
+
 # Default owner for records created in the admin interface
 DEFAULT_ADMIN_OWNER = {
 	'email':'defaultowner@indivo.org',
@@ -26,17 +29,16 @@ LOGIN_URL = '/admin/login/'
 LOGOUT_URL = '/admin/logout/'
 
 
-# No Databases
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-#        'NAME': '',                      # Or path to database file if using sqlite3.
-#        'USER': '',                      # Not used with sqlite3.
-#        'PASSWORD': '',                  # Not used with sqlite3.
-#        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-#        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-#    }
-#}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'indivo_admin_db',                      # Or path to database file if using sqlite3.
+        'USER': 'YOURUSER',                      # Not used with sqlite3.
+        'PASSWORD': 'YOURPW',                  # Not used with sqlite3.
+        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+    }
+}
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name

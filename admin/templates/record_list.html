@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<section id="records">
+		<div class="page-header">
+			<h1>Records</h1>
+		</div>
+		<ul>
+		{% for record in records %}
+			<li><a href="/admin/record/{{ record.record_id }}/">{{ record.label }} ({{ record.record_id }})</a></li>
+		{% empty %}
+		
+		{% endfor %}
+		</ul>
+	</section>
+{% endblock %}

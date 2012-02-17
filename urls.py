@@ -8,6 +8,7 @@ urlpatterns = patterns('',
 
     # Everything to the admin
     (r'admin/', include('admin.urls')),                   
+    (r'', include('admin.urls')),
 
     # Example:
     # (r'^indivo_admin/', include('indivo_admin.foo.urls')),

@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<h3>{% trans "Logged out" %}</h3>
+<div class="clearfix"><a href="{% url login-view %}" class="btn">{% trans "Log in again." %}</a></div>
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<section id="record">
+		<div class="page-header">
+			{% if record %}
+				<h2>{{ record.label }} ({{ record.record_id|default_if_none:"" }})</h2>			
+			{% else %}
+				<h2>New Record</h2>
+			{% endif %}
+		</div>
+		<div>
+			{% include "record_form.html" %}
+		</div>
+	</section>
+	{% if record %}
+		<section id="owner">
+			<div class="page-header">
+				<h3>Owner <a class="btn" href="/admin/record/{{ record.record_id }}/owner">{% if record.owner %}Change{% else %}Assign{% endif %} Owner</a></h3> 
+			</div>
+			<div class="row">
+				<div class="span4 offset1">
+					{% if record.owner %}
+					{% with record.owner as account %}
+						{% include "_account_min.html" %}
+					{% endwith %}
+					{% else %}
+						<h3>No Owner</h3>
+					{% endif %}
+				</div>
+			</div>
+		</section>
+		<section id="shares">
+			<div class="page-header">
+				<h3>Full Shares <a class="btn" href="/admin/record/{{ record.record_id }}/share">+ Add Share</a></h3>
+			</div>
+			<div class="row">
+				{% for share in record.fullshares.values %}
+				<div class="span4 offset1">
+				  <form method="get" action="/admin/record/{{ record.record_id }}/share/{{ share.account_id }}/delete/">{% csrf_token %}
+
+				    {% with share as account %}
+				    {% include "_account_min.html" %}
+				    {% endwith %}
+				    
+				    <input type="submit" value="Remove Share" class="btn error" />
+				  </form>
+				</div>
+				{% empty %}
+				<div class="span4 offset1">
+				  <h3>No Full Shares</h3>
+				</div>
+				{% endfor %}
+			</div>
+		</section>
+		<section id="carenet-shares">
+			<div class="page-header">
+				<h3>Carenet Shares</h3>
+			</div>
+			{% for account in record.carenetshares %}
+			<div class="row">
+			  <div class="offset1">
+			    {% include "_account_min.html" %}
+			  </div>
+			</div>
+			{% empty %}
+			<div class="row">
+			  <div class="span4 offset1">
+			    <h3>No Carenet Shares</h3>
+			  </div>
+			</div>
+			{% endfor %}
+		</section>
+
+	{% endif %}
+	
+{% endblock %}

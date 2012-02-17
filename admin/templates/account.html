@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<section id="account">
+		<div class="page-header">
+			<h2>Account Details</h2>			
+		</div>
+		<div class="span8">
+			{% include "_account.html" %}
+			{% if account.state == 'active' %}
+				<form action="/admin/account/{{ account.account_id }}/retire" method="post">
+					<div class="input">
+						<button class="btn error" type="submit">Retire Account</button>
+					</div>
+				</form>
+			{% endif %}
+		</div>
+	</section>
+	<section id="owner">
+		<div class="page-header">
+			<h3>Records Owned</h3>
+		</div>
+		{% for record in account.owned_records %}
+		<div class="row">
+		  <div class="offset1">
+		    {% include "_record_min.html" %}
+		  </div>
+		</div>
+		{% empty %}
+		<div class="row">
+		  <div class="offset1">
+		    <h3>No Records Owned</h3>
+		  </div>
+		</div>
+		{% endfor %}
+	</section>
+	<section id="shares">
+		<div class="page-header">
+			<h3>Full Shares</h3>
+		</div>
+		{% for record in account.fullshared_records %}
+		<div class="row">
+		  <div class="offset1">
+		    {% include "_record_min.html" %}
+		  </div>
+		</div>
+		{% empty %}
+		<div class="row">
+		  <div class="offset1">
+		    <h3>No Full Shares<h3>
+		  </div>
+		</div>
+		{% endfor %}
+	</section>
+	<section id="shares">
+		<div class="page-header">
+			<h3>Carenet Shares</h3>
+		</div>
+		{% for record in account.carenet_records %}
+		<div class="row">
+		  <div class="offset1">
+		    {% include "_record_min.html" %}
+		  </div>
+		</div>
+		{% empty %}
+		<div class="row">
+		  <div class="offset1">
+		    <h3>No Records Shared via Carenets</h3>
+		  </div>
+		</div>
+		{% endfor %}
+	</section>
+
+{% endblock %}

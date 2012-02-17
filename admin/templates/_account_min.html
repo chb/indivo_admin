@@ -1,0 +1,9 @@
+<address>
+	<strong>
+			<a href="/admin/account/{{ account.account_id }}/">{{ account.full_name }}</a>
+			{% if not account.state == 'active' %}
+				<span class="label warning">{{ account.state }}</span>
+			{% endif %}
+	</strong><br>
+	<span>{{ account.account_id }}</span>
+</address>

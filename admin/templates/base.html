@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css" />
+    <!-- TODO: move css to file -->
+    <style>
+		body {padding-top: 50px;}
+		.btn {vertical-align: middle}
+		section {padding-top:15px}
+		address {margin-bottom:5px}
+		form .clearfix {margin-bottom:5px}
+		.uneditable-input {width:100%}
+		.btn.xsmall {padding: 2px 4px 2px; font-size: 11px;}
+	</style>
+    <title>Indivo Admin</title>
+</head>
+
+<body>
+	<div class="topbar" data-dropdown="dropdown">
+		<div class="topbar-inner">
+	    	<div class="container">
+	    		<h3><a href="/admin/">Indivo Admin</a></h3>
+	    		<ul class="nav">
+					<li>
+						<a href="/admin/record/">New Record</a>
+					</li>
+				</ul>
+				<form class="pull-left" action="/admin/record/search" method="get">
+            		<input type="text" name="search_string" placeholder="Search Records by Full Name">
+          		</form>
+	    		<ul class="nav secondary-nav">
+	    			{% if user and user.is_authenticated %}
+						<li>
+		    				<a href="/admin/logout/">Log Out</a>
+		    			</li>
+	    			{% else %}
+	    				<li>
+		    				<a href="/admin/login/">Login</a>
+		    			</li>
+	    			{% endif %}
+				</ul>
+	    	</div>
+	    </div><!-- /topbar-inner -->
+	</div>
+	<div class="container-fluid">
+	    <div class="sidebar">
+	    	{% block sidebar %}
+	    		{% if recents %}
+					<h3>Recent Records</h3>
+					<ul class="unstyled">
+					{% for record in recents %}
+						<li><a class="" href="/admin/record/{{ record.record_id }}/">{{ record.label }}</a></li>
+					{% endfor %}
+					</ul>
+				{% endif %}
+			{% endblock %}	
+	    </div>
+	    <div class="content">
+	        {% block content %}{% endblock %}
+	    </div>
+	</div>
+</body>
+</html>
+
