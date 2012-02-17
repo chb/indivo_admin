@@ -7,7 +7,7 @@ TEMPLATE_DEBUG = DEBUG
 
 CREATE_USERS = True
 DEFAULT_USERS = (
-        # ('Your Name', 'your_email@domain.com', 'yourpassword'),
+        # ('Your Name', 'your_email@domain.com', 'yourusername', 'yourpassword'),
 )
 
 INDIVO_OAUTH_CREDENTIALS = ('indivoadmin', 'indivoadminsecret')
