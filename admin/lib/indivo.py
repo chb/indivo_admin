@@ -263,13 +263,14 @@ class IndivoAccount(IndivoModel):
 
         # try fetching the account
         default_info = settings.DEFAULT_ADMIN_OWNER
-        account = cls(account_id=default_info['email'], 
-                      full_name=default_info['full_name'],
-                      contact_email=default_info['contact_email'], new=False)
-
         try:
-            account._fetch()
+            account = cls(account_id=default_info['email'], 
+                          full_name=default_info['full_name'],
+                          contact_email=default_info['contact_email'], new=False)
         except ValueError as e:
+            account = cls(account_id=default_info['email'], 
+                          full_name=default_info['full_name'],
+                          contact_email=default_info['contact_email'], new=True)
             
             # account didn't exist: create it
             account.push()
